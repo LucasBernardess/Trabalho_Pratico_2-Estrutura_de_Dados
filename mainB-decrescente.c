@@ -220,11 +220,10 @@ int main() {
         comparacao[i] = 0;
         movimentacao[i] = 0;
     }
-
-    int decrescente = TAM;
     
     srand(time(NULL));
     for (int i = 0; i < 10; i++) {
+        int decrescente = rand() % 10*TAM;
         for (int j = 0; j < TAM; j++, decrescente--) {
             matriz[i][j] = decrescente; 
         }
