@@ -214,8 +214,9 @@ int main() {
 
     srand(time(NULL));
     for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < TAM; j++) {
-            matriz[i][j] = j; 
+        int crescente = rand() % TAM;
+        for (int j = 0; j < TAM; j++, crescente++) {
+            matriz[i][j] = crescente; 
         }
     }
   

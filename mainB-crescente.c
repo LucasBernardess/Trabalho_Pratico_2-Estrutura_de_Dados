@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define TAM 10000
+#define TAM 20
 unsigned long comparacao[6], movimentacao[6];
 
 typedef int chave;
@@ -45,11 +45,10 @@ void insertion_sort(Registro *arr, int n) {
 
         while (j >= 0 && arr[j].chave > key) {
             comparacao[1]++;
-            movimentacao[1]++;
             arr[j + 1].chave = arr[j].chave;
+            movimentacao[1]++;
             j = j - 1;
         }
-        movimentacao[1]++;
         arr[j + 1].chave = key;
     }
 }
@@ -64,10 +63,9 @@ void shell_sort(Registro *arr, int n) {
             temp = arr[i].chave;
             for (j = i; j >= gap && arr[j-gap].chave > temp; j -= gap) {
                 comparacao[2]++;
-                movimentacao[2]++;
                 arr[j].chave = arr[j-gap].chave;
+                movimentacao[2]++;
             }
-            movimentacao[2]++;
             arr[j].chave = temp;
         }
     }
@@ -223,9 +221,10 @@ int main() {
 
     srand(time(NULL));
     for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < TAM; j++) {
-            matriz[i][j] = j; 
-        }
+        int crescente = rand() % TAM;
+        for (int j = 0; j < TAM; j++, crescente ++) {
+            matriz[i][j] = crescente; 
+        }      
     }
   
     for(int i = 0; i<10; i++){

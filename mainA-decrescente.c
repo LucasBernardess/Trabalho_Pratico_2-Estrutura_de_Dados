@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define TAM 10000
+#define TAM 200000
 unsigned long comparacao[6], movimentacao[6];
 
 // Seleção
@@ -213,11 +213,13 @@ int main() {
     }
 
     srand(time(NULL));
-    int decrescente = TAM;
     for (int i = 0; i < 10; i++) {
+        int decrescente = rand() % 10*TAM;
         for (int j = 0; j < TAM; j++, decrescente--) {
             matriz[i][j] = decrescente; 
+           // printf("%d - ", matriz[i][j]);
         }
+       // printf("\n\n\n");
     }
   
     for(int i = 0; i<10; i++){

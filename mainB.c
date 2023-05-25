@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define TAM 10000
+#define TAM 200000
 unsigned long comparacao[6], movimentacao[6];
 
 typedef int chave;
