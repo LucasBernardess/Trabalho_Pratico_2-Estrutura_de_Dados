@@ -5,16 +5,17 @@
 #include "registro.h"
 
 // Main
+
+
+
+
 int main() {
+    int crescente, decrescente;
     float time_total[6], start, end, cpu_time;
     unsigned long comparacao[6], movimentacao[6];
-    int **matriz;
 
     Registro *arr = (Registro*)malloc(TAM*sizeof(Registro));
-    matriz = (int**)malloc(10*sizeof(int));
-	for(int i = 0; i<10; i++){
-		matriz[i] = (int*)malloc(TAM*sizeof(int));
-	}
+    Registro *temp = (Registro*)malloc(TAM*sizeof(Registro));
 
     for(int i = 0; i<6; i++){
         time_total[i] = 0;
@@ -24,42 +25,36 @@ int main() {
 
     srand(time(NULL));
 
-    switch (2) {
-    case 1: // random
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < TAM; j++) {
-                matriz[i][j] = rand() % TAM; 
-            }
+    for (int i = 0; i < 10; i++) {
+        switch (3) {
+            case 1: // random
+                for (int j = 0; j < TAM; j++) {
+                    temp[j].chave = rand() % TAM; 
+                }
+                break;
+            case 2: // Crescente
+                crescente = rand() % TAM;
+                for (int j = 0; j < TAM; j++, crescente++) {
+                    temp[j].chave = crescente; 
+                }
+                break;
+            case 3: // Decrescente
+                decrescente = rand() % 10*TAM;
+                for (int j = 0; j < TAM; j++, decrescente--) {
+                    temp[j].chave = decrescente; 
+                }
+                break;
+            default:
+                printf("Números não definidos\n");
+                break;
         }
-        break;
-    case 2: // Crescente
-        for (int i = 0; i < 10; i++) {
-            int crescente = rand() % TAM;
-            for (int j = 0; j < TAM; j++, crescente++) {
-                matriz[i][j] = crescente; 
-            }
-        }
-        break;
-    case 3: // Decrescente
-        for (int i = 0; i < 10; i++) {
-            int decrescente = rand() % 10*TAM;
-            for (int j = 0; j < TAM; j++, decrescente--) {
-                matriz[i][j] = decrescente; 
-            }
-        }
-        break;
-    default:
-        printf("Números não definidos\n");
-        break;
-    }
-  
-    for(int i = 0; i<10; i++){
+        
         // Seleção
         for(int j = 0; j<TAM; j++){
-            arr[j].chave = matriz[i][j];
+            arr[j].chave = temp[j].chave;
         }
         start = clock();
-        //selection_sort(arr, TAM, comparacao, movimentacao);
+       // selection_sort(arr, TAM, comparacao, movimentacao);
         end = clock();
         cpu_time = ((double)end- start)/CLOCKS_PER_SEC;
         printf("\n\nSeleção : %d", i);
@@ -72,10 +67,10 @@ int main() {
 
         // Inserção
         for(int j = 0; j<TAM; j++){
-            arr[j].chave = matriz[i][j];
+            arr[j].chave = temp[j].chave;
         }
         start = clock();
-        //insertion_sort(arr, TAM, comparacao, movimentacao);
+      // insertion_sort(arr, TAM, comparacao, movimentacao);
         end = clock();
         cpu_time = ((double)end- start)/CLOCKS_PER_SEC;
         printf("\n\nInserção : %d", i);
@@ -88,10 +83,10 @@ int main() {
 
         // Shell
         for(int j = 0; j<TAM; j++){
-            arr[j].chave = matriz[i][j];
+            arr[j].chave = temp[j].chave;
         }
         start = clock();
-        //shell_sort(arr, TAM, comparacao, movimentacao);
+       //shell_sort(arr, TAM, comparacao, movimentacao);
         end = clock();
         cpu_time = ((double)end- start)/CLOCKS_PER_SEC;
         printf("\n\nShellsort : %d", i);
@@ -104,10 +99,10 @@ int main() {
 
         // Quicksort
         for(int j = 0; j<TAM; j++){
-            arr[j].chave = matriz[i][j];
+            arr[j].chave = temp[j].chave;
         }
         start = clock();
-        quicksort(arr, 0, TAM - 1, comparacao, movimentacao);
+        quick_sort(arr, 0, TAM - 1, comparacao, movimentacao);
         end = clock();
         cpu_time = ((double)end- start)/CLOCKS_PER_SEC;
         printf("\n\nQuicksort : %d", i);
@@ -120,10 +115,10 @@ int main() {
 
         // Heapsort
         for(int j = 0; j<TAM; j++){
-            arr[j].chave = matriz[i][j];
+            arr[j].chave = temp[j].chave;
         }
         start = clock();
-        //heap_sort(arr, TAM, comparacao, movimentacao);
+       // heap_sort(arr, TAM, comparacao, movimentacao);
         end = clock();
         cpu_time = ((double)end- start)/CLOCKS_PER_SEC;
         printf("\n\nHeapsort : %d", i);
@@ -136,10 +131,10 @@ int main() {
 
         // Mergesort
         for(int j = 0; j<TAM; j++){
-            arr[j].chave = matriz[i][j];
+            arr[j].chave = temp[j].chave;
         }
         start = clock();
-        //merge_sort(arr, 0, TAM - 1, comparacao, movimentacao);
+       // merge_sort(arr, 0, TAM - 1, comparacao, movimentacao);
         end = clock();
         cpu_time = ((double)end- start)/CLOCKS_PER_SEC;
         printf("\n\nMergesort : %d", i);
@@ -167,10 +162,10 @@ int main() {
     printf("Média de comparações --> %lu\n", comparacao[2]/10);
     printf("Média de movimentações--> %lu\n\n", movimentacao[2]/10);
 
-    printf("Quicksort\n");
+   printf("Quicksort\n");
     printf("Tempo médio --> %lf\n", time_total[3]/10);
     printf("Média de comparações --> %lu\n", comparacao[3]/10);
-    printf("Média de movimentações --> %lu\n\n", movimentacao[3]/10);
+    printf("Média de movimentações --> %lu\n\n", movimentacao[3]/10); 
 
     printf("Heapsort\n");
     printf("Tempo médio --> %lf\n", time_total[4]/10);
@@ -181,6 +176,8 @@ int main() {
     printf("Tempo médio --> %lf\n", time_total[5]/10);
     printf("Média de comparações --> %lu\n", comparacao[5]/10);
     printf("Média de movimentações --> %lu\n", movimentacao[5]/10);
+
+
 
     return 0;
 }

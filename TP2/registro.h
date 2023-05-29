@@ -1,14 +1,14 @@
 #ifndef REGISTRO_H
 #define REGISTRO_H
 
-#define TAM 150000
+#define TAM 200000
 
 typedef int chave;
 typedef char mensagem;
 
 typedef struct{
     chave chave;
-    mensagem mensagem[50][50];
+    //mensagem mensagem[50][50];
 }Registro;
 
 // Seleção
@@ -24,9 +24,13 @@ void shell_sort(Registro *arr, int n, unsigned long *comparacao, unsigned long *
 void swap(int *a, int *b, unsigned long *comparacao, unsigned long *movimentacao);
 
 // Quickshort
-int partition(Registro *arr, int low, int high, unsigned long *comparacao, unsigned long *movimentacao);
+int particiona_random(Registro vet[], int inicio, int fim, unsigned long *comparacao, unsigned long *movimentacao);
 
-void quick_sort(Registro *arr, int low, int high, unsigned long *comparacao, unsigned long *movimentacao);
+int particiona(Registro vet[], int inicio, int fim, unsigned long *comparacao, unsigned long *movimentacao);
+
+void troca(Registro vet[], int i, int j, unsigned long *comparacao, unsigned long *movimentacao);
+
+void quick_sort(Registro vet[], int low, int high, unsigned long *comparacao, unsigned long *movimentacao);
 // Heapsort
 void heapify(Registro *arr, int n, int i, unsigned long *comparacao, unsigned long *movimentacao);
 void heap_sort(Registro *arr, int n, unsigned long *comparacao, unsigned long *movimentacao);

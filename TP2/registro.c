@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+
+
 // Seleção
 void selection_sort(Registro *arr, int n, unsigned long *comparacao, unsigned long *movimentacao){
     int i, j, minInd, temp;
@@ -70,7 +73,7 @@ void swap(int *a, int *b, unsigned long *comparacao, unsigned long *movimentacao
     *a = *b;
     *b = temp;
 }
-
+/*
 // Quicksort
 int partition(Registro *arr, int low, int high, unsigned long *comparacao, unsigned long *movimentacao) {
     int pivot = arr[high].chave;
@@ -98,6 +101,72 @@ void quick_sort(Registro *arr, int low, int high, unsigned long *comparacao, uns
         quick_sort(arr, low, pi - 1, comparacao, movimentacao);
         quick_sort(arr, pi + 1, high, comparacao, movimentacao);
     }
+} */
+
+void troca(Registro vet[], int i, int j, unsigned long *comparacao, unsigned long *movimentacao)
+{
+	int aux = vet[i].chave;
+    movimentacao[3]++;
+	vet[i].chave = vet[j].chave;
+    movimentacao[3]++;
+	vet[j].chave = aux;
+    movimentacao[3]++;
+
+}
+
+// particiona e retorna o índice do pivô
+int particiona(Registro vet[], int inicio, int fim, unsigned long *comparacao, unsigned long *movimentacao)
+{
+	int pivo, pivo_indice, i;
+	
+	pivo = vet[fim].chave; // o pivô é sempre o último elemento
+    movimentacao[3]++;
+	pivo_indice = inicio;
+    movimentacao[3]++;
+	
+	for(i = inicio; i < fim; i++)
+	{
+		// verifica se o elemento é <= ao pivô
+        comparacao[3]++;
+		if(vet[i].chave <= pivo)
+		{
+			// realiza a troca
+			troca(vet, i, pivo_indice, comparacao, movimentacao);
+			// incrementa o pivo_indice
+			pivo_indice++;
+		}
+	}
+	
+	// troca o pivô
+	troca(vet, pivo_indice, fim, comparacao, movimentacao);
+	
+	// retorna o índice do pivô
+	return pivo_indice;
+}
+
+// escolhe um pivô aleatório para evitar o pior caso do quicksort
+int particiona_random(Registro vet[], int inicio, int fim, unsigned long *comparacao, unsigned long *movimentacao)
+{
+	// seleciona um número entre fim (inclusive) e inicio (inclusive)
+	int pivo_indice = (rand() % (fim - inicio + 1)) + inicio;
+	
+	// faz a troca para colocar o pivô no fim
+	troca(vet, pivo_indice, fim, comparacao, movimentacao);
+	// chama a particiona
+	return particiona(vet, inicio, fim, comparacao, movimentacao);
+}
+
+void quick_sort(Registro vet[], int inicio, int fim, unsigned long *comparacao, unsigned long *movimentacao)
+{
+	if(inicio < fim)
+	{
+		// função particionar retorna o índice do pivô
+		int pivo_indice = particiona_random(vet, inicio, fim, comparacao, movimentacao);
+		
+		// chamadas recursivas quick_sort
+		quick_sort(vet, inicio, pivo_indice - 1, comparacao, movimentacao);
+		quick_sort(vet, pivo_indice + 1, fim, comparacao, movimentacao);
+	}
 }
 
 // Heapsort
