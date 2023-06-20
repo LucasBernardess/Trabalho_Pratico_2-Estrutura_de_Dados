@@ -1,0 +1,5 @@
+Integrantes: Lucas Eduardo Bernardes de Paula, Messias Feres Curi Melo, Lucas Emanuel Pereira de Melo
+
+O trabalho foi desenvolvido no Ubuntu e também foi testado no Windows
+
+Pra compilar: primeiramente rode o comando "make" no terminal e logo após o "./tp"
